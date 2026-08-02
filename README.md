@@ -13,4 +13,4 @@ DO NOT USE INTERVALS LARGER THAN 32K - WILL CRASH YOUR COMPUTER.
 
 (I know it's reinventing the wheel but it's a project I could have done in the time I had)
 
-<img width="1461" height="844" alt="Screenshot 2026-08-02 at 12 33 57" src="https://github.com/user-attachments/assets/b72bb8bc-1617-4903-b8b9-37071213e618" />
+<img width="1461" height="844" alt="Screenshot 2026-08-02 at 12 34 50" src="https://github.com/user-attachments/assets/d9c3912c-8e44-4e65-9bc5-0dd5af58f366" />

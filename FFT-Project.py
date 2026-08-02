@@ -60,7 +60,6 @@ def CoreFFTBinary(Input,shift,index,preset):
             for i in range(0,numb):
                 converter[i+c*2*numb,e+c*2*numb] = 1
                 converter[(i + numb)+c*2*numb, e+c*2*numb] = m.cos((2*m.pi*(k*i))/(2*constnumb)) + (m.sin((2*m.pi*(k*i))/(2*constnumb)))*1j + newfilt*(m.cos(index*((2*m.pi*(k*i))/(2*constnumb))/shift) + (m.sin(index*((2*m.pi*(k*i))/(2*constnumb)))/shift)*1j)
-                der = m.cos((2*m.pi*(k*i))/(2*constnumb)) + (m.sin((2*m.pi*(k*i))/(2*constnumb)))*1j
                 e += 1
                 p += 1
             e=numb

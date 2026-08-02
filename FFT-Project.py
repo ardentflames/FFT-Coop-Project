@@ -1,4 +1,5 @@
 import numpy as np
+from time import sleep
 import scipy as sp
 from matplotlib import pyplot as plt
 import scipy.io.wavfile as spw
@@ -97,9 +98,7 @@ def calculations(input):
     audio = audio / ind
     audiooutput = []
     for i in range(audio.size):
-        a = float(audio[i].real)
-        if a < 0:
-            a = 0
+        a = np.abs(audio[i])
         audiooutput.append(a)
 
     return(audiooutput)
@@ -107,12 +106,18 @@ def calculations(input):
 # Data processing and externals (intervals must be powers of 2)
 def process(audiofile,intervals):
     wow, data = spw.read(audiofile)
-    data = np.array(data)
+    if int(data.ndim) > 1:
+        track = 9999
+        while track > data.shape[1]:
+            track = int(input("This audio track has " + str(data.shape[1]) + " tracks. Choose track: "))
+        data = np.array(data[:,(track-1)])
+    else:
+        data = np.array(data)
     times = data.size // intervals
     for i in range(0,times):
         ndata = data[0+i*intervals:intervals+i*intervals]
         results = np.array(calculations(ndata))
-        print(results)
+        print("interval "+str(0+i*intervals)+" to interval "+str(intervals+i*intervals)+" out of "+str(data.size)+" Total data points")
         x = np.arange(0,results.size//2)
         y = results[0:results.size//2]
         plt.plot(x,y)
@@ -122,8 +127,13 @@ print("This is just a small project I worked on during my third Co-op Work Term.
 print("It uses numpy and matplotlib to simulate an FFT, without using any prebuilt external ")
 print("FFT modules. Please drag the wav file you wish to analyze into the same folder as this program")
 print("MAKE SURE YOU HAVE NUMPY, MATPLOTLIB, AND SCIPY INSTALLED IN YOUR PYTHON ENVIRONMENT")
+print("This FFT does calculations for points that are a power of 2, will not be accurate if you don't specify a power of two for the # between intervals")
 print("")
-intervals = int(input("The interval between subsequent FFTs, must be a power of 2 (might crash your computer if it's over 16k): "))
+sleep(3)
+print("If a wavfilewarning occurs, ignore. The wav file contains extraneous metadata scipy doesn't support")
+sleep(2)
+print("")
+intervals = int(input("The interval for each FFT, must be a power of 2 (might crash your computer if it's over 16k): "))
 print("")
 soundfile = str(input("Please type the full name of the .wav file you intend to use the FFT for: "))
 
